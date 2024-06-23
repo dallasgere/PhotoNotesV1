@@ -15,7 +15,7 @@ struct HomeView: View {
         NavigationStack {
             List {
                 ForEach(homeViewModel.homeModel) { photo in
-                    NavigationLink(destination: TestView(title: photo.title, description: photo.description, photo: photo.photo)) {
+                    NavigationLink(destination: PhotoNoteDestinationPage(photoNoteModel: photo)) {
                         Text(photo.title)
                     }
                 }
@@ -34,21 +34,6 @@ struct HomeView: View {
                 AddNewPhotoNote(homeViewModel: homeViewModel)
             })
         }
-    }
-}
-
-struct TestView: View {
-    @State var title: String
-    @State var description: String
-    @State var photo: Image
-    
-    var body: some View {
-        Text(title)
-        Text(description)
-        photo
-            .resizable()
-            .scaledToFit()
-            .frame(width: 300, height: 300)
     }
 }
 

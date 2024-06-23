@@ -55,7 +55,7 @@ struct AddNewPhotoNote: View {
                         } else {
                             Image(systemName: "plus.circle.fill")
                                 .foregroundColor(.gray)
-                                .font(.title)
+                                .font(.body)
                             
                             PhotosPicker("select photo", selection: $photoItem, matching:.images)
                                 .onAppear {

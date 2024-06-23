@@ -18,6 +18,7 @@
 		BED9666E2C2652C400DBFE30 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9666D2C2652C400DBFE30 /* HomeViewModel.swift */; };
 		BED966702C2652D600DBFE30 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9666F2C2652D600DBFE30 /* HomeModel.swift */; };
 		BEEE0FE12C279F4C00A5AD8C /* AddNewPhotoNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE0FE02C279F4C00A5AD8C /* AddNewPhotoNote.swift */; };
+		BEEE0FE32C27C04500A5AD8C /* PhotoNoteDestinationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE0FE22C27C04500A5AD8C /* PhotoNoteDestinationPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		BED9666D2C2652C400DBFE30 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		BED9666F2C2652D600DBFE30 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		BEEE0FE02C279F4C00A5AD8C /* AddNewPhotoNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPhotoNote.swift; sourceTree = "<group>"; };
+		BEEE0FE22C27C04500A5AD8C /* PhotoNoteDestinationPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteDestinationPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				BEEE0FE02C279F4C00A5AD8C /* AddNewPhotoNote.swift */,
+				BEEE0FE22C27C04500A5AD8C /* PhotoNoteDestinationPage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				BED9666C2C2638EA00DBFE30 /* HomeView.swift in Sources */,
 				BED966402C2637D400DBFE30 /* ContentView.swift in Sources */,
 				BED9663E2C2637D400DBFE30 /* PhotoNotesApp.swift in Sources */,
+				BEEE0FE32C27C04500A5AD8C /* PhotoNoteDestinationPage.swift in Sources */,
 				BEEE0FE12C279F4C00A5AD8C /* AddNewPhotoNote.swift in Sources */,
 				BED966702C2652D600DBFE30 /* HomeModel.swift in Sources */,
 				BED9666E2C2652C400DBFE30 /* HomeViewModel.swift in Sources */,
