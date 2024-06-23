@@ -6,13 +6,16 @@
 //
 
 import Foundation
+import SwiftUI
 
 // this is the HomeModel that I am using 
 struct HomeModel: Identifiable {
     let id = UUID()
     var title: String
+    var photo: Image
     
-    init(title: String) {
+    init(title: String, photo: Image) {
         self.title = title
+        self.photo = photo
     }
 }
