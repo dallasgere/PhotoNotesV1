@@ -100,25 +100,13 @@ struct AddNewPhotoNote: View {
                 
                 // getting the photos location data
                 if let imageData = try? await photoItem?.loadTransferable(type: Data.self) {
-                    extractGPSData(from: imageData)
-                    print("Latitude:::::::::::::::::: \(String(describing: location?.latitude))")
+                    location = AddNewPhotoNoteUtil.getLocationData(from: imageData)
+                    print("Latitude::::::::::::::::::: \(String(describing: location?.latitude))")
                     print("Longitude:::::::::::::::::: \(String(describing: location?.longitude))")
                 } else {
                     print("could not get the location")
                 }
             }
-        }
-    }
-    
-    // extracting coordinates from photo
-    func extractGPSData(from imageData: Data) {
-        guard let image = CIImage(data: imageData) else { return }
-        
-        let properties = image.properties
-        if let gps = properties[kCGImagePropertyGPSDictionary as String] as? [String: Any],
-           let latitude = gps[kCGImagePropertyGPSLatitude as String] as? Double,
-           let longitude = gps[kCGImagePropertyGPSLongitude as String] as? Double {
-            location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         }
     }
 }
