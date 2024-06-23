@@ -8,6 +8,7 @@
 import Foundation
 import CoreImage
 import SwiftUI
+import PhotosUI
 
 class HomeViewModel: ObservableObject {
     @Published var homeModel: [HomeModel] = []
@@ -18,8 +19,8 @@ class HomeViewModel: ObservableObject {
 //    }
     
     // adding a new photo note to the list of photo notes
-    func addPhoto(title: String, photo: Image, description: String) {
-        let newPhoto = HomeModel(title: title, photo: photo, description: description)
+    func addPhoto(title: String, photo: Image, description: String, coordinates: CLLocationCoordinate2D) {
+        let newPhoto = HomeModel(title: title, photo: photo, description: description, coordinates: coordinates)
         self.homeModel.append(newPhoto)
     }
     

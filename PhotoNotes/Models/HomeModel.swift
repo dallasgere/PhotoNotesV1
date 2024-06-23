@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import PhotosUI
+import CoreImage
 
 // this is the HomeModel that I am using 
 struct HomeModel: Identifiable {
@@ -14,10 +16,12 @@ struct HomeModel: Identifiable {
     var title: String
     var photo: Image
     var description: String
+    var coordinates: CLLocationCoordinate2D
     
-    init(title: String, photo: Image, description: String) {
+    init(title: String, photo: Image, description: String, coordinates: CLLocationCoordinate2D) {
         self.title = title
         self.photo = photo
         self.description = description
+        self.coordinates = coordinates
     }
 }

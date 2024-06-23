@@ -25,6 +25,9 @@ struct AddNewPhotoNote: View {
     @State private var photoItem: PhotosPickerItem?
     @State private var photo: Image?
     
+    // location data
+    @State private var location: CLLocationCoordinate2D?
+    
     // view
     var body: some View {
         VStack {
@@ -72,8 +75,10 @@ struct AddNewPhotoNote: View {
                     
                     // add button
                     Button(action: {
-                        if let sureImage = self.photo {
-                            homeViewModel.addPhoto(title: newPhotoNoteTitle, photo: sureImage, description: newPhotoNoteDescription)
+                        if let sureImage = self.photo, let coordinates = location {
+                            homeViewModel.addPhoto(title: newPhotoNoteTitle, photo: sureImage, description: newPhotoNoteDescription, coordinates: coordinates)
+                        } else {
+                            print("unable to add phot note")
                         }
                         newPhotoNoteTitle = ""
                         presentationMode.wrappedValue.dismiss()
@@ -86,12 +91,34 @@ struct AddNewPhotoNote: View {
         }
         .onChange(of: photoItem) {
             Task {
+                // getting the photo
                 if let loadedImage = try? await photoItem?.loadTransferable(type: Image.self) {
                     photo = loadedImage
                 } else {
                     print("failed to load image")
                 }
+                
+                // getting the photos location data
+                if let imageData = try? await photoItem?.loadTransferable(type: Data.self) {
+                    extractGPSData(from: imageData)
+                    print("Latitude:::::::::::::::::: \(String(describing: location?.latitude))")
+                    print("Longitude:::::::::::::::::: \(String(describing: location?.longitude))")
+                } else {
+                    print("could not get the location")
+                }
             }
+        }
+    }
+    
+    // extracting coordinates from photo
+    func extractGPSData(from imageData: Data) {
+        guard let image = CIImage(data: imageData) else { return }
+        
+        let properties = image.properties
+        if let gps = properties[kCGImagePropertyGPSDictionary as String] as? [String: Any],
+           let latitude = gps[kCGImagePropertyGPSLatitude as String] as? Double,
+           let longitude = gps[kCGImagePropertyGPSLongitude as String] as? Double {
+            location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         }
     }
 }

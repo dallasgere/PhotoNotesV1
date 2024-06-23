@@ -110,6 +110,7 @@
 				BED966682C26387C00DBFE30 /* Components */,
 				BED966672C26385700DBFE30 /* Models */,
 				BED966432C2637D600DBFE30 /* Preview Content */,
+				BEE981DD2C28BD97008F5E93 /* Util */,
 				BED9666A2C2638B300DBFE30 /* ViewModels */,
 				BED966692C2638AB00DBFE30 /* Views */,
 			);
@@ -172,6 +173,13 @@
 				BED9666D2C2652C400DBFE30 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BEE981DD2C28BD97008F5E93 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
