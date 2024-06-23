@@ -10,15 +10,13 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject private var homeViewModel: HomeViewModel = HomeViewModel()
     @State private var isHomeSheetActive = false
-    @State private var photoNoteTitle = ""
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(homeViewModel.homeModel) { photo in
-                    //                    Text(photo.title)
-                    NavigationLink(destination: TestView(photo: photo.photo)) {
-                        Text("hello")
+                    NavigationLink(destination: TestView(title: photo.title, description: photo.description, photo: photo.photo)) {
+                        Text(photo.title)
                     }
                 }
             }
@@ -33,16 +31,20 @@ struct HomeView: View {
                 })
             }
             .sheet(isPresented: $isHomeSheetActive, content: {
-                AddNewPhotoNote(homeViewModel: homeViewModel, newPhotoNoteTitle: $photoNoteTitle)
+                AddNewPhotoNote(homeViewModel: homeViewModel)
             })
         }
     }
 }
 
 struct TestView: View {
+    @State var title: String
+    @State var description: String
     @State var photo: Image
     
     var body: some View {
+        Text(title)
+        Text(description)
         photo
             .resizable()
             .scaledToFit()

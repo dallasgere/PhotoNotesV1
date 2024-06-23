@@ -13,9 +13,11 @@ struct HomeModel: Identifiable {
     let id = UUID()
     var title: String
     var photo: Image
+    var description: String
     
-    init(title: String, photo: Image) {
+    init(title: String, photo: Image, description: String) {
         self.title = title
         self.photo = photo
+        self.description = description
     }
 }

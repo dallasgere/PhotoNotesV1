@@ -9,9 +9,14 @@ import SwiftUI
 import PhotosUI
 
 struct AddNewPhotoNote: View {
-    // passing in the view model and title to add back in
+    // passing in the view model
     @ObservedObject var homeViewModel: HomeViewModel
-    @Binding var newPhotoNoteTitle: String
+    
+    // title
+    @State var newPhotoNoteTitle = ""
+    
+    // description
+    @State var newPhotoNoteDescription = ""
     
     // this allows to close the sheet after the button has been pressed
     @Environment(\.presentationMode) var presentationMode
@@ -25,11 +30,50 @@ struct AddNewPhotoNote: View {
         VStack {
             NavigationStack {
                 Form {
-                    TextField("New Todo", text: $newPhotoNoteTitle)
+                    // title
+                    TextField("Photo Note Title", text: $newPhotoNoteTitle)
                     
+                    // description
+                    ZStack(alignment:.topLeading) {
+                        if newPhotoNoteDescription.isEmpty {
+                            Text("Description...")
+                                .foregroundColor(.gray)
+                        }
+                        TextEditor(text: $newPhotoNoteDescription)
+                            .frame(height: 100)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(nil)
+                    }
+                    
+                    // photo picker with preview
+                    HStack {
+                        // Photo preview
+                        if let loadedImage = photo {
+                            loadedImage
+                                .resizable()
+                                .scaledToFit()
+                        } else {
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(.gray)
+                                .font(.title)
+                            
+                            PhotosPicker("select photo", selection: $photoItem, matching:.images)
+                                .onAppear {
+                                    Task {
+                                        if let loadedImage = try? await photoItem?.loadTransferable(type: Image.self) {
+                                            photo = loadedImage
+                                        } else {
+                                            print("Failed to load image")
+                                        }
+                                    }
+                                }
+                        }
+                    }
+                    
+                    // add button
                     Button(action: {
                         if let sureImage = self.photo {
-                            homeViewModel.addPhoto(title: newPhotoNoteTitle, photo: sureImage)
+                            homeViewModel.addPhoto(title: newPhotoNoteTitle, photo: sureImage, description: newPhotoNoteDescription)
                         }
                         newPhotoNoteTitle = ""
                         presentationMode.wrappedValue.dismiss()
@@ -39,13 +83,6 @@ struct AddNewPhotoNote: View {
                 }
                 .navigationTitle("Add New Note")
             }
-            
-            PhotosPicker("select photo", selection: $photoItem, matching: .images)
-            
-//            photo?
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: 300, height: 300)
         }
         .onChange(of: photoItem) {
             Task {
@@ -65,7 +102,7 @@ struct AddNewPhotoNote: View {
         @State var title = ""
         
         var body: some View {
-            AddNewPhotoNote(homeViewModel: homeViewModel, newPhotoNoteTitle: $title)
+            AddNewPhotoNote(homeViewModel: homeViewModel, newPhotoNoteTitle: title)
         }
     }
     
