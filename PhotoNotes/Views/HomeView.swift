@@ -14,9 +14,13 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(homeViewModel.homeModel) { photo in
-                    NavigationLink(destination: PhotoNoteDestinationPage(photoNoteModel: photo)) {
-                        Text(photo.title)
+                if self.homeViewModel.homeModel.isEmpty {
+                    Text("No photos yet, add some with the + button on the top right!")
+                } else {
+                    ForEach(homeViewModel.homeModel) { photo in
+                        NavigationLink(destination: PhotoNoteDestinationView(photoNoteViewModel: PhotoNoteDestinationViewModel(photoNoteModel: PhotoNoteDestinationModel(homeModel: photo)))) {
+                            Text(photo.title)
+                        }
                     }
                 }
             }
